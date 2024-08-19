@@ -1,0 +1,61 @@
+class OlympicRecord:
+    def __init__(self):
+        self.years =[]
+        self.medals = {}
+    def enter_year(self):
+        num_year=int(input("Enter the number of Olympics event you want to input data for: "))
+        for i in range(num_year):
+            year= int(input("Enter the year of olympic event:" ))
+            self.years.append(year)
+
+
+    def enter_medal_data(self, country):
+        print(f"Enter medal data for {country}:\n")
+        for year in self.years:
+            print(f"Year: {year}")
+            gold = int(input("Enter the number of gold medals: "))
+            silver = int(input("Enter the number of silver medals: "))
+            bronze = int(input("Enter the number of bronze medals: "))
+            Total_medals = int(gold + silver + bronze)
+            print(f"Total medals:{Total_medals}")
+            self.medals[year] = {'gold': gold, 'silver': silver, 'bronze': bronze,'Total':Total_medals}
+            print()
+
+    def view_medal_tally(self, country):
+        print(f"\nMedal Tally for {country} in the last 5 Olympic events:\n")
+        print(f"{'Year':<10}{'Gold':<10}{'Silver':<10}{'Bronze':<10}{'Total medals':<10}")
+        for year in self.years:
+            if year in self.medals:
+                print(f"{year:<10}{self.medals[year]['gold']:<10}{self.medals[year]['silver']:<10}{self.medals[year]['bronze']:<10} {self.medals[year]['Total']:<10}")
+
+    def run(self):
+        while True:
+            print("\n  Summer Olympic Records for Germany")
+            print("1.Enter year of Olympic event")
+            print("2. Enter Medal Data for Germany")
+            print("3. View Medal Tally for Germany (Last 5 Events)")
+            print("4. Exit")
+            choice = input("Select an option: ")
+
+            if choice == '1':
+              self.enter_year()
+            elif choice == '2':
+              if not self.years:
+                print("please enter the year first ")
+              else:
+                self.enter_medal_data('Germany')
+            elif choice == '3':
+              if not self.medals:
+                print("No medals data avavilable. please enter the meadls data first:")
+              else:
+                self.view_medal_tally('Germany')
+            elif choice =='4':
+              print("Exiting ... Good Bye!")
+              break
+            else:
+                print("Invalid option. please try again.")
+
+
+if __name__ == "__main__":
+    console = OlympicRecord()
+    console.run()
